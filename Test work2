@@ -1,0 +1,50 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+class determinant
+{
+    public float result(float [ , ] arr)
+    {
+        float res;
+        if(arr.GetLength(0) == 1)
+        {
+            res = arr[0, 0];
+        }
+        else if(arr.GetLength(0) == 2)
+        {
+            res = arr[0, 0] * arr[1, 1] - arr[1, 0] * arr[0, 1];
+        }
+        else
+        {
+            res = arr[0, 0] * arr[1, 1] * arr[2, 2] - arr[0, 0] * arr[1, 2] * arr[2, 1] - arr[0, 1] * arr[1, 0] * arr[2, 2] + arr[0, 1] * arr[1, 2] * arr[2, 0] + arr[0, 2] * arr[1, 0] * arr[2, 1] - arr[0, 2] * arr[1, 1] * arr[2, 0];
+        }
+        return res;
+    }
+}
+namespace ConsoleApp3
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            float[ , ] a = 
+            {
+                {5, 6, 3},
+                {4, 8, 2},
+                {2, 4, 5}
+            };
+            determinant done = new determinant();
+            if(a.GetLength(0) != Math.Sqrt(a.Length))
+            {
+                Console.WriteLine("Неверный массив");
+            }
+            else
+            {
+                Console.WriteLine("Детерминант матрицы равен: " + done.result(a));
+            }
+            Console.ReadKey();
+        }
+    }
+}
