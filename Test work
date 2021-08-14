@@ -1,0 +1,36 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+class Palindrom
+{
+    public bool Check(string text)
+    {
+        char[] a = text.ToCharArray();
+        int len = a.Length;
+        for (int i = 0; i < len / 2; i++)
+        {
+            if (a[i] != a[len - 1 - i])
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+}
+namespace ConsoleApp3
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.Write("Введите текст на проверку на палиндром: ");
+            string text = Console.ReadLine();
+            Palindrom doit = new Palindrom();
+            bool done = doit.Check(text);
+            Console.WriteLine(done);
+            Console.ReadKey();
+        }
+    }
+}
