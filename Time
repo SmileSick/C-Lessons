@@ -1,0 +1,65 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+public class Time
+{
+    public int hours { get; set; }
+    public int minutes { get; set; }
+   /* public Time(int h, int m)
+    {
+        hours = h;
+        minutes = m;
+    }*/
+    public int Hours
+    {
+        get
+        {
+            return hours;
+        }
+
+        set
+        {
+            hours = value;
+        }
+    }
+    public int Minutes
+    {
+        get
+        {
+            return minutes;
+        }
+
+        set
+        {
+            minutes = value;
+        }
+    }
+
+    public void Add(int min)
+    {
+        minutes += min;
+        while(minutes >= 60)
+        {
+            minutes -= 60;
+            hours++;
+        }
+    }
+}
+
+namespace ConsoleApp4
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            //Time t = new Time(5, 8);
+            Time t = new Time { hours = 5,  minutes = 8};
+            t.Add(158);
+            Console.WriteLine(t.Hours + " " + t.Minutes);
+            Console.ReadLine();
+        }
+    }
+}
