@@ -1,0 +1,60 @@
+using System;
+
+namespace GuessNumber
+{
+    class Program
+    {
+        static void Main()
+        {
+            Console.Title = "Угадай число";
+            Random rand = new Random();
+            string temp;
+            int secret = rand.Next(100) + 1;
+            Console.WriteLine("Я загадал число от 1 до 100. Попробуйте его отгадать. У вас 15 попыток.");
+            for(int i = 15; i > 0; i--) // i = i - 1; i -=1; i--;
+            {
+                Console.Write("Попыток осталось: " + i + ". Введите число: ");
+                temp = Console.ReadLine();
+                if(!int.TryParse(temp, out int myNum))
+                {
+                    i++;
+                    continue;
+                }
+                if (myNum == secret)
+                {
+                    Console.WriteLine("Поздравляю. Вы угадали мое число за " + (16 - i) + " попыток.");
+                    if(i == 15)
+                    {
+                        Console.WriteLine("Вы либо читер, либо экстрасенс.");
+                    }
+                    else if(i > 10)
+                    {
+                        Console.WriteLine("Красавчик.");
+                    }
+                    else if(i > 5)
+                    {
+                        Console.WriteLine("Хорошо постарались.");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Тренируйтесь, чтобы улучшить результат.");
+                    }
+                    Console.Write("Нажмите любую клавишу для выхода.");
+                    Console.ReadKey();
+                    return;
+                }
+                else if(myNum > secret)
+                {
+                    Console.WriteLine("Мое число меньше твоего.");
+                }
+                else
+                {
+                    Console.WriteLine("Мое число больше твоего.");
+                }
+            }
+            Console.WriteLine("Попытки закончились. Было загадано число " + secret + ".");
+            Console.WriteLine("Нажмите любую клавишу для выхода.");
+            Console.ReadKey();
+        }
+    }
+}
