@@ -1,0 +1,61 @@
+using System;
+
+namespace GuessNum
+{
+    class Program
+    {
+        static void Main()
+        {
+            Console.Title = "Угадай число";
+            // Definition of variables
+            Random rand = new Random();
+            const int MAX_NUM = 1000; // setup
+            int middle = (int)Math.Log(MAX_NUM, 2) + 1;
+            int small = (int)Math.Ceiling(middle / 2f);
+            int big = middle + small;
+            int secret = rand.Next(MAX_NUM) + 1;
+            // The rules of the game
+            Console.WriteLine("Я загадал число от 1 до " + MAX_NUM + ".");
+            Console.WriteLine("Попробуйте его отгадать.");
+            Console.WriteLine("У вас " + big + " попыток.");
+            // Preparing for the game
+            string textNum;
+            int count = big;
+            bool win = false;
+            // Game Cycle
+            do
+            {
+                Console.Write("Попыток осталось: " + count + ". Введите число: ");
+                textNum = Console.ReadLine();
+                count--;
+                if (!int.TryParse(textNum, out int myNum))
+                {
+                    Console.WriteLine("Это не число.");
+                    continue;
+                }
+                if (myNum == secret) win = true;
+                else if (myNum > secret) Console.WriteLine("Мое число меньше твоего.");
+                else Console.WriteLine("Мое число больше твоего.");
+            } while (!win && count > 0) ;
+            // Results
+            if (win)
+            {
+                Console.WriteLine("Угадали.");
+                count = big - count;
+                Console.WriteLine("Попыток потрачено: " + count + ".");
+                if (count <= small) Console.WriteLine("Красавчик.");
+                else if (count <= middle) Console.WriteLine("Хорошо постарались.");
+                else Console.WriteLine("Тренируйтесь, чтобы улучшить результат.");
+            }
+            else
+            {
+                Console.WriteLine("Попытки закончились.");
+                Console.WriteLine("Было загадано число " + secret + ".");
+            }
+            // Ending
+            Console.WriteLine("Спасибо за игру.");
+            Console.WriteLine("Нажмите любую клавишу для выхода.");
+            Console.ReadKey();
+        }
+    }
+}
